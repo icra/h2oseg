@@ -1,0 +1,158 @@
+<!doctype html><html><head>
+  <meta charset=utf8>
+  <title>H2OSEG</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    table{
+      border-collapse:collapse;
+    }
+    tr[sticky]{
+      position:sticky;
+      top:0;
+      background:#eee;
+    }
+    th{
+      background:#eee;
+    }
+    /*font*/
+    [monospace]{
+      font-family:monospace;
+    }
+
+    /*tamany*/
+    [smaller]{
+      font-size:smaller;
+    }
+    [xsmall]{
+      font-size:x-small;
+    }
+
+    /*alineació*/
+    [center]{
+      text-align:center;
+    }
+    [right]{
+      text-align:right;
+    }
+  </style>
+<head><body>
+<p>Pàgina en construcció (creació base de dades SQL)</b>
+<h1>H2OSEG - taula fluxos d'aigua (dades crues) | estructura</h1>
+
+<div id=app>
+  <b>Nova dada</b>
+  <table border=1 monospace>
+    <tr>
+      <th>Data inici</th>
+      <td><input type=date v-model="nova_dada.data_inici"></td>
+    </tr>
+    <tr>
+      <th>Data final</th>
+      <td>
+        <input type=date v-model="nova_dada.data_final">
+      </td>
+    </tr>
+    <tr>
+      <th>Lloc</th>
+      <td>
+        <input type=text placeholder="lloc" v-model="nova_dada.lloc">
+      </td>
+    </tr>
+    <tr>
+      <th>Volum (m<sup>3</sup>)</th>
+      <td>
+        <input type=number v-model="nova_dada.volum">
+      </td>
+    </tr>
+    <tr>
+      <th>Tipus</th>
+      <td>
+        <label><input type=radio v-model="nova_dada.tipus" :value="'entrada'">entrada</label>
+        <label><input type=radio v-model="nova_dada.tipus" :value="'sortida'">sortida</label>
+      </td>
+    </tr>
+    <tr>
+      <th>Proveïdor dada</th>
+      <td>
+        <input type=text
+          v-model="nova_dada.proveidor"
+          placeholder="ACA, ATLL, ..."
+        >
+      </td>
+    </tr>
+    <tr>
+      <td colspan=2 right>
+        <button @click="dades.push(nova_dada);nova_dada=new Dada()"
+          style="
+            padding:0.618em 1em;
+            background:lightgreen;
+          "
+        >
+          insertar dada
+        </button>
+      </td>
+    </tr>
+  </table><hr>
+
+  <b>Dades insertades</b>
+  <table border=1 monospace>
+    <thead>
+      <tr sticky>
+        <th>Data inici</th>
+        <th>Data final</th>
+        <th>
+          <details>
+            <summary>Lloc</summary>
+            <div>
+              filtre lloc
+            </div>
+          </details>
+        </th>
+        <th>Volum (m<sup>3</sup>)</th>
+        <th>Tipus (entrada, sortida)</th>
+        <th>Proveïdor dada</th>
+        <th>Esborrar</th>
+      </tr>
+    </thead>
+    <tbody smaller>
+      <tr v-for="dada,i in dades">
+        <td center>{{dada.data_inici}}</td>
+        <td center>{{dada.data_final}}</td>
+        <td center>{{dada.lloc}}</td>
+        <td center>{{dada.volum}}</td>
+        <td center>{{dada.tipus}}</td>
+        <td center>{{dada.proveidor}}</td>
+        <td>
+          <button @click="dades.splice(i,1)">esborrar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  class Dada{
+    constructor(data_inici,data_final,lloc,volum,tipus,proveidor){
+      this.data_inici = data_inici || new Date().toISOString().substring(0,10); //text yyyy-mm-dd
+      this.data_final = data_final || new Date().toISOString().substring(0,10); //text yyyy-mm-dd
+      this.lloc       = lloc;                                   //text
+      this.volum      = volum||0;                               //number
+      this.tipus      = tipus||"entrada";                       //text "entrada","sortida"
+      this.proveidor  = proveidor;                              //text
+    }
+  }
+
+  let dades=[
+    new Dada("2021-10-01","2021-01-07","Sau",85.16,"entrada",""),
+    new Dada("2021-11-01","2021-01-07","Sau",82.23,"entrada",""),
+    new Dada("2021-12-01","2021-01-07","Sau",91.18,"entrada",""),
+  ];
+
+  let app=Vue.createApp({
+    data(){return{
+      Dada,
+      nova_dada:new Dada(),
+      dades,
+    }},
+  }).mount("#app");
+</script>

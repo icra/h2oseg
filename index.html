@@ -14,6 +14,12 @@
     th{
       background:#eee;
     }
+
+    summary:hover{
+      cursor:pointer;
+      text-decoration:underline;
+    }
+
     /*font*/
     [monospace]{
       font-family:monospace;
@@ -36,11 +42,18 @@
     }
   </style>
 <head><body>
-<p>Pàgina en construcció (creació base de dades SQL)</b>
-<h1>H2OSEG - taula fluxos d'aigua (dades crues) | estructura</h1>
+
+<p>Pàgina en construcció</b>
+
+<nav>
+  <a href="db/db.sqlite">descarregar base de dades SQL</a> |
+  <a href="xls/inicial.xlsx">descarregar excel inicial</a>
+</nav>
+
+<h1>Projecte H2OSEG - taula fluxos d'aigua (dades crues)</h1>
 
 <div id=app>
-  <b>Nova dada</b>
+  <b>Insertar nova dada</b>
   <table border=1 monospace>
     <tr>
       <th>Data inici</th>
@@ -76,7 +89,16 @@
       <td>
         <input type=text
           v-model="nova_dada.proveidor"
-          placeholder="ACA, ATLL, ..."
+          placeholder="ACA, ATLL..."
+        >
+      </td>
+    </tr>
+    <tr>
+      <th>Comentaris</th>
+      <td>
+        <input type=text
+          v-model="nova_dada.comentaris"
+          placeholder="info"
         >
       </td>
     </tr>
@@ -87,72 +109,109 @@
             padding:0.618em 1em;
             background:lightgreen;
           "
-        >
-          insertar dada
+        >insertar dada
         </button>
       </td>
     </tr>
   </table><hr>
 
-  <b>Dades insertades</b>
-  <table border=1 monospace>
-    <thead>
-      <tr sticky>
-        <th>Data inici</th>
-        <th>Data final</th>
-        <th>
-          <details>
-            <summary>Lloc</summary>
-            <div>
-              filtre lloc
-            </div>
-          </details>
-        </th>
-        <th>Volum (m<sup>3</sup>)</th>
-        <th>Tipus (entrada, sortida)</th>
-        <th>Proveïdor dada</th>
-        <th>Esborrar</th>
-      </tr>
-    </thead>
-    <tbody smaller>
-      <tr v-for="dada,i in dades">
-        <td center>{{dada.data_inici}}</td>
-        <td center>{{dada.data_final}}</td>
-        <td center>{{dada.lloc}}</td>
-        <td center>{{dada.volum}}</td>
-        <td center>{{dada.tipus}}</td>
-        <td center>{{dada.proveidor}}</td>
-        <td>
-          <button @click="dades.splice(i,1)">esborrar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div v-if="dades">
+    <b>Base de dades ({{get_dades.length}} de {{dades.length}} files)</b>
+    <table border=1 monospace>
+      <thead>
+        <tr sticky>
+          <th>Data inici</th>
+          <th>Data final</th>
+          <th>
+            <details>
+              <summary>Lloc</summary>
+              <b>Filtra per lloc</b>
+              <div v-for="lloc in get_llocs_diferents">
+                <button @click="filtres.lloc=lloc" :disabled="filtres.lloc==lloc">{{lloc}}</button>
+              </div>
+              <button v-if="filtres.lloc" @click="filtres.lloc=false">X</button>
+            </details>
+          </th>
+          <th>Volum (m<sup>3</sup>)</th>
+          <th>Tipus <small>(entrada/sortida)</small></th>
+          <th>Proveïdor dada</th>
+          <th>Comentaris</th>
+          <th>Editar</th>
+        </tr>
+      </thead>
+      <tbody smaller>
+        <tr v-for="dada,i in get_dades">
+          <td center>{{dada.data_inici}}</td>
+          <td center>{{dada.data_final}}</td>
+          <td center>{{dada.lloc}}</td>
+          <td center>{{dada.volum}}</td>
+          <td center>{{dada.tipus}}</td>
+          <td center>{{dada.proveidor}}</td>
+          <td center>{{dada.comentaris}}</td>
+          <td>
+            <!--
+            <button>esborrar</button>
+            -->
+            [en construcció]
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <script>
   class Dada{
-    constructor(data_inici,data_final,lloc,volum,tipus,proveidor){
+    constructor(data_inici,data_final,lloc,volum,tipus,proveidor,comentaris){
       this.data_inici = data_inici || new Date().toISOString().substring(0,10); //text yyyy-mm-dd
       this.data_final = data_final || new Date().toISOString().substring(0,10); //text yyyy-mm-dd
-      this.lloc       = lloc;                                   //text
-      this.volum      = volum||0;                               //number
-      this.tipus      = tipus||"entrada";                       //text "entrada","sortida"
-      this.proveidor  = proveidor;                              //text
+      this.lloc       = lloc||"lloc";                                           //text
+      this.volum      = volum||0;                                               //number (m3)
+      this.tipus      = tipus||"entrada";                                       //text "entrada","sortida"
+      this.proveidor  = proveidor||"proveidor";                                 //text
+      this.comentaris = comentaris||"comentaris";                               //text
     }
   }
-
-  let dades=[
-    new Dada("2021-10-01","2021-01-07","Sau",85.16,"entrada",""),
-    new Dada("2021-11-01","2021-01-07","Sau",82.23,"entrada",""),
-    new Dada("2021-12-01","2021-01-07","Sau",91.18,"entrada",""),
-  ];
 
   let app=Vue.createApp({
     data(){return{
       Dada,
       nova_dada:new Dada(),
-      dades,
+      dades:null,
+
+      filtres:{
+        lloc:false,
+      },
     }},
+
+    methods:{
+      insertar_dada(){
+        //TODO
+      },
+    },
+
+    computed:{
+      get_dades(){
+        let dades = this.dades.filter(row=>row);
+
+        //aplicar filtres
+        if(this.filtres.lloc){
+          let f_lloc = this.filtres.lloc;
+          dades = dades.filter(row=>row.lloc==f_lloc);
+        }
+
+        return dades;
+      },
+
+      get_llocs_diferents(){
+        let llocs = new Set(this.dades.map(row=>row.lloc));
+        return Array.from(llocs);
+      },
+    },
   }).mount("#app");
+
+  //llegeix db.sqlite
+  fetch("db/api.php").then(r=>r.json()).then(arr=>{
+    app.dades=arr;
+  });
 </script>

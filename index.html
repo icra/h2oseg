@@ -53,90 +53,18 @@
 <h1>Projecte H2OSEG - taula fluxos d'aigua (dades crues)</h1>
 
 <div id=app>
-  <b>Insertar nova dada</b>
-  <table border=1 monospace>
-    <tr>
-      <th>Data inici</th>
-      <td><input type=date v-model="nova_dada.data_inici"></td>
-    </tr>
-    <tr>
-      <th>Data final</th>
-      <td>
-        <input type=date v-model="nova_dada.data_final">
-      </td>
-    </tr>
-    <tr>
-      <th>Lloc</th>
-      <td>
-        <input type=text placeholder="lloc" v-model="nova_dada.lloc">
-      </td>
-    </tr>
-    <tr>
-      <th>Volum (m<sup>3</sup>)</th>
-      <td>
-        <input type=number v-model="nova_dada.volum">
-      </td>
-    </tr>
-    <tr>
-      <th>Tipus</th>
-      <td>
-        <label><input type=radio v-model="nova_dada.tipus" :value="'entrada'">entrada</label>
-        <label><input type=radio v-model="nova_dada.tipus" :value="'sortida'">sortida</label>
-      </td>
-    </tr>
-    <tr>
-      <th>Proveïdor dada</th>
-      <td>
-        <input type=text
-          v-model="nova_dada.proveidor"
-          placeholder="ACA, ATLL..."
-        >
-      </td>
-    </tr>
-    <tr>
-      <th>Comentaris</th>
-      <td>
-        <input type=text
-          v-model="nova_dada.comentaris"
-          placeholder="info"
-        >
-      </td>
-    </tr>
-    <tr>
-      <td colspan=2 right>
-        <button @click="dades.push(nova_dada);nova_dada=new Dada()"
-          style="
-            padding:0.618em 1em;
-            background:lightgreen;
-          "
-        >insertar dada
-        </button>
-      </td>
-    </tr>
-  </table><hr>
-
   <div v-if="dades">
-    <b>Base de dades ({{get_dades.length}} de {{dades.length}} files)</b>
+    <b>Base de dades ({{get_dades.length}})</b>
     <table border=1 monospace>
       <thead>
         <tr sticky>
           <th>Data inici</th>
           <th>Data final</th>
-          <th>
-            <details>
-              <summary>Lloc</summary>
-              <b>Filtra per lloc</b>
-              <div v-for="lloc in get_llocs_diferents">
-                <button @click="filtres.lloc=lloc" :disabled="filtres.lloc==lloc">{{lloc}}</button>
-              </div>
-              <button v-if="filtres.lloc" @click="filtres.lloc=false">X</button>
-            </details>
-          </th>
+          <th>Lloc</th>
           <th>Volum (m<sup>3</sup>)</th>
           <th>Tipus <small>(entrada/sortida)</small></th>
           <th>Proveïdor dada</th>
           <th>Comentaris</th>
-          <th>Editar</th>
         </tr>
       </thead>
       <tbody smaller>
@@ -148,12 +76,6 @@
           <td center>{{dada.tipus}}</td>
           <td center>{{dada.proveidor}}</td>
           <td center>{{dada.comentaris}}</td>
-          <td>
-            <!--
-            <button>esborrar</button>
-            -->
-            [en construcció]
-          </td>
         </tr>
       </tbody>
     </table>
@@ -163,13 +85,13 @@
 <script>
   class Dada{
     constructor(data_inici,data_final,lloc,volum,tipus,proveidor,comentaris){
-      this.data_inici = data_inici || new Date().toISOString().substring(0,10); //text yyyy-mm-dd
-      this.data_final = data_final || new Date().toISOString().substring(0,10); //text yyyy-mm-dd
-      this.lloc       = lloc||"lloc";                                           //text
-      this.volum      = volum||0;                                               //number (m3)
-      this.tipus      = tipus||"entrada";                                       //text "entrada","sortida"
-      this.proveidor  = proveidor||"proveidor";                                 //text
-      this.comentaris = comentaris||"comentaris";                               //text
+      this.data_inici = data_inici ||new Date().toISOString().substring(0,10); //text yyyy-mm-dd
+      this.data_final = data_final ||new Date().toISOString().substring(0,10); //text yyyy-mm-dd
+      this.lloc       = lloc       ||"lloc";                                   //text
+      this.volum      = volum      ||0;                                        //number (m3)
+      this.tipus      = tipus      ||"entrada";                                //text "entrada","sortida"
+      this.proveidor  = proveidor  ||"proveidor";                              //text
+      this.comentaris = comentaris ||"comentaris";                             //text
     }
   }
 
@@ -178,34 +100,14 @@
       Dada,
       nova_dada:new Dada(),
       dades:null,
-
-      filtres:{
-        lloc:false,
-      },
     }},
 
-    methods:{
-      insertar_dada(){
-        //TODO
-      },
-    },
+    methods:{},
 
     computed:{
       get_dades(){
         let dades = this.dades.filter(row=>row);
-
-        //aplicar filtres
-        if(this.filtres.lloc){
-          let f_lloc = this.filtres.lloc;
-          dades = dades.filter(row=>row.lloc==f_lloc);
-        }
-
         return dades;
-      },
-
-      get_llocs_diferents(){
-        let llocs = new Set(this.dades.map(row=>row.lloc));
-        return Array.from(llocs);
       },
     },
   }).mount("#app");

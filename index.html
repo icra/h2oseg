@@ -46,14 +46,21 @@
   </style>
 </head><body>
 
-<nav>
-  <a href="db/api.php">descarregar última versió taula unificada (db.sqlite)</a> |
-  <a href="csv">carpeta CSVs</a>
-</nav>
-
-<h1>Projecte H2OSEG - taula fluxos d'aigua (dades crues)</h1>
 
 <div id=app>
+  <nav>
+    <a href="db/api.php" v-if="data_ultima_versio_taula_unificada">
+      Última versió taula unificada:
+      [{{data_ultima_versio_taula_unificada}}]
+      (descarregar JSON)
+    </a>
+    <span v-else>
+      consultant data última versió...
+    </span>
+  </nav>
+
+  <h1>Projecte H2OSEG - taula fluxos d'aigua (dades crues)</h1>
+
   <table border=1>
     <tr>
       <th colspan=100 left>
@@ -170,6 +177,8 @@
         "sequera":"ESTAT SEQUERA (anys)",
         "cabals":"CABALS",
       },
+
+      data_ultima_versio_taula_unificada:null, //consultar via fetch
     }},
 
     methods:{
@@ -300,4 +309,8 @@
       },
     },
   }).mount("#app");
+
+  fetch("db/get_data_ultima_versio.php").then(r=>r.text()).then(txt=>{
+    app.data_ultima_versio_taula_unificada=txt;
+  });
 </script>

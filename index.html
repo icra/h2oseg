@@ -1,7 +1,7 @@
 <!doctype html><html><head>
   <meta charset=utf8>
   <title>H2OSEG</title>
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <style>
     table{
       border-collapse:collapse;
@@ -26,7 +26,7 @@
     }
 
     /*tamany*/
-    [smaller]{
+    [small]{
       font-size:smaller;
     }
     [xsmall]{
@@ -40,80 +40,264 @@
     [right]{
       text-align:right;
     }
+    [left]{
+      text-align:left;
+    }
   </style>
-<head><body>
-
-<p>Pàgina en construcció</b>
+</head><body>
 
 <nav>
-  <a href="db/db.sqlite">descarregar base de dades SQL</a> |
-  <a href="xls/inicial.xlsx">descarregar excel inicial</a>
+  <a href="db/api.php">descarregar última versió taula unificada (db.sqlite)</a> |
+  <a href="csv">carpeta CSVs</a>
 </nav>
 
 <h1>Projecte H2OSEG - taula fluxos d'aigua (dades crues)</h1>
 
 <div id=app>
-  <div v-if="dades">
-    <b>Base de dades ({{get_dades.length}})</b>
-    <table border=1 monospace>
-      <thead>
-        <tr sticky>
-          <th>Data inici</th>
-          <th>Data final</th>
-          <th>Lloc</th>
-          <th>Volum (m<sup>3</sup>)</th>
-          <th>Tipus <small>(entrada/sortida)</small></th>
-          <th>Proveïdor dada</th>
-          <th>Comentaris</th>
-        </tr>
-      </thead>
-      <tbody smaller>
-        <tr v-for="dada,i in get_dades">
-          <td center>{{dada.data_inici}}</td>
-          <td center>{{dada.data_final}}</td>
-          <td center>{{dada.lloc}}</td>
-          <td center>{{dada.volum}}</td>
-          <td center>{{dada.tipus}}</td>
-          <td center>{{dada.proveidor}}</td>
-          <td center>{{dada.comentaris}}</td>
-        </tr>
-      </tbody>
+  <table border=1>
+    <tr>
+      <th colspan=100 left>
+        Carregar fitxers CSV
+      </th>
+    </tr>
+
+    <tbody v-for="nom_csv in ['noms','sequera','cabals']">
+      <tr>
+        <td>
+          {{info[nom_csv]}}
+        </td>
+        <td>
+          <input type=file @change="load_csv($event,nom_csv)" :disabled="fitxers[nom_csv]" :nom_csv="nom_csv">
+          <button
+            v-if="fitxers[nom_csv]"
+            @click="fitxers[nom_csv]=null;esborra_input(nom_csv)"
+          >
+            esborrar
+          </button>
+        </td>
+      </tr>
+      <tr v-if="fitxers[nom_csv]">
+        <td colspan=100>
+          <details>
+            <summary>Fitxer carregat ("{{nom_csv}}")</summary>
+            <table border=1 small style="border-collapse:collapse">
+              <tr v-for="row in fitxers[nom_csv]">
+                <td v-for="cell in row">{{cell}}</td>
+              </tr>
+            </table>
+          </details>
+        </td>
+      </tr>
+    </tbody>
+
+    <tr>
+      <td>
+      <td>
+        <button
+          :disabled="!fitxers.noms || !fitxers.sequera || !fitxers.cabals"
+          style="padding:0.618em 1em"
+          @click="processar_taules()"
+        >Unificar taules
+        </button>
+      </td>
+    </tr>
+  </table>
+
+  <div v-if="taula_final">
+    <hr>
+    <p>
+      <b>Taula resultant ({{taula_final.taula_cabals.length}} files)</b>
+      <div>
+        <button
+          style="padding:0.618em 1em"
+          @click="update_db_sqlite()"
+        >GUARDAR TAULA RESULTANT (SOBREESCRIURE)
+        </button>
+      </div>
+    </p>
+    <table border=1 small>
+      <tr sticky>
+        <th>codi_sad</th>
+        <th>any</th>
+        <th>nom_dada</th>
+        <th>valor_cabal</th>
+        <th>metadata</th>
+      </tr>
+      <tr v-for="row in taula_final.taula_cabals">
+        <td>{{row.codi_sad}}</td>
+        <td>{{row.any}}</td>
+        <td>{{row.nom_dada}}</td>
+        <td>{{row.valor_cabal}}</td>
+        <td>
+          <details>
+            <summary>metadata</summary>
+            <table border=1>
+              <tr v-for="val,key in row.metadata">
+                <th>{{key}}</th>
+                <td v-if="val">
+                  <div v-if="val.constructor===String">{{val}}</div>
+                  <div v-else-if="val.constructor===Object">
+                    <table xsmall border=1>
+                      <tr v-for="val2,key2 in val">
+                        <th>{{key2}}</th>
+                        <td>{{val2}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </details>
+        </td>
+      </tr>
     </table>
   </div>
 </div>
-
 <script>
-  class Dada{
-    constructor(data_inici,data_final,lloc,volum,tipus,proveidor,comentaris){
-      this.data_inici = data_inici ||new Date().toISOString().substring(0,10); //text yyyy-mm-dd
-      this.data_final = data_final ||new Date().toISOString().substring(0,10); //text yyyy-mm-dd
-      this.lloc       = lloc       ||"lloc";                                   //text
-      this.volum      = volum      ||0;                                        //number (m3)
-      this.tipus      = tipus      ||"entrada";                                //text "entrada","sortida"
-      this.proveidor  = proveidor  ||"proveidor";                              //text
-      this.comentaris = comentaris ||"comentaris";                             //text
-    }
-  }
-
-  let app=Vue.createApp({
+  let app = Vue.createApp({
     data(){return{
-      Dada,
-      nova_dada:new Dada(),
-      dades:null,
+      fitxers:{
+        noms:null,
+        sequera:null,
+        cabals:null,
+      },
+
+      //objecte a guardar a base de dades
+      taula_final:null,
+
+      info:{
+        "noms":"NOMS (info)",
+        "sequera":"ESTAT SEQUERA (anys)",
+        "cabals":"CABALS",
+      },
     }},
 
-    methods:{},
+    methods:{
+      load_csv(event,nom_csv){
+        if(!nom_csv) return;
+        console.log({nom_csv});
+        let reader = new FileReader();
+        reader.onload=function(){
+          let csv = reader.result;
+          let taula = app.processa_csv(csv);
+          app.fitxers[nom_csv] = taula;
+        };
+        reader.readAsText(event.target.files[0]);
+      },
 
-    computed:{
-      get_dades(){
-        let dades = this.dades.filter(row=>row);
-        return dades;
+      processa_csv(csv){
+        let taula=[];
+        let linies = csv.split("\r\n").filter(n=>n);
+        linies.forEach(linia=>{
+          let nova_linia = linia.split(";");
+          taula.push(nova_linia);
+        });
+        return taula;
+      },
+
+      esborra_input(nom_csv){
+        let el = document.querySelector(`input[nom_csv=${nom_csv}]`);
+        if(el) el.value='';
+      },
+
+      processar_taules(){
+        let noms    = this.fitxers.noms;
+        let sequera = this.fitxers.sequera;
+        let cabals  = this.fitxers.cabals;
+        if(!noms || !sequera || !cabals){
+          throw({noms,sequera,cabals});
+        }
+
+        //genera diccionari noms
+        let dicc_noms={};
+        noms.forEach((row,i)=>{
+          if(i==0){
+            for(let j=0;j<row.length;j++){
+              row[j] = row[j].trim();
+            }
+            return;
+          }
+          let codi_sad = row[0]; //codi_sad
+          let obj={};
+          for(let j=1;j<row.length;j++){
+            let key = noms[0][j];
+            let val = row[j];
+            obj[key]=val;
+          }
+          dicc_noms[codi_sad]=obj;
+        });
+
+        //genera diccionari anys estat sequera
+        let dicc_anys={};
+        sequera.forEach((row,i)=>{
+          if(i==0) return;
+          let any   = row[0];
+          let estat = row[1]
+          dicc_anys[any]=estat;
+        });
+
+        let taula_cabals=[];
+        cabals.forEach((row,i)=>{
+          if(i==0) return;
+
+          let codi_sad = row[0];
+          let any      = row[1];
+
+          let metadata = {
+            codi_sad: dicc_noms[codi_sad],
+            sequera:  dicc_anys[any]||"NA",
+          };
+
+          if(!metadata.codi_sad){
+            console.log("no trobat:",{codi_sad});
+          }
+
+          for(let j=2;j<row.length;j++){
+            let nom_dada    = cabals[0][j];
+            let valor_cabal = parseFloat(row[j].replace(",","."));
+            if(isNaN(valor_cabal)) valor_cabal="";
+            let nova_fila = {
+              codi_sad,
+              any,
+              nom_dada,
+              valor_cabal,
+              metadata,
+            };
+            taula_cabals.push(nova_fila);
+          }
+        });
+
+        //return value
+        let rv={
+          dicc_noms,
+          dicc_anys,
+          taula_cabals,
+        }
+        app.taula_final = rv;
+      },
+
+      update_db_sqlite(){
+        if(!this.taula_final){
+          throw("taula final no existeix");
+          return;
+        }
+
+        //transforma la taula a text format JSON
+        let text = JSON.stringify(this.taula_final.taula_cabals);
+
+        let body = new FormData();
+        body.append('taula',text);
+
+        fetch(
+          'db/update_taula_unificada.php',
+          {method:'POST',body})
+        .then(r=>r.text())
+        .then(text=>{
+          console.log(text);
+        }).catch(err=>{
+          console.error(err);
+        });
       },
     },
   }).mount("#app");
-
-  //llegeix db.sqlite
-  fetch("db/api.php").then(r=>r.json()).then(arr=>{
-    app.dades=arr;
-  });
 </script>

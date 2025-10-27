@@ -1,0 +1,82 @@
+﻿CODI_SAD;NOM_COMU_PUNT;ENTRADA_SORTIDA_CONTROL;RIU;MASSA_AIGUA;NOM_MASSA_AIGUA;X_COOR;Y_COOR
+ABASTAMENT_ATL;Aigües Ter-Llobregat;S;TER;ES100MSPF2000227;El Pasteral;466924,9798;4648138,33
+ABASTAMENT_ETAP_MONTFULLA;ETAP Montfullà (CATSA, CACBGI);S;TER;ES100MSPF2000227;El Pasteral;467853,9598;4648399,31
+AFLUENT_GOTARRA_ONYAR;Cabal de la Riera Gotarra a Campllong;E;ONYAR;ES100MSPF2000340;Rieres de Gotarra, Verneda i Benaula;484791,3199;4639374,09
+AFLUENT_LLEMENA;Riera de Llèmena;E;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;481002,91;4647826,82
+AFLUENT_ONYAR;Riu Onyar sota el Pont de la Font del Rei;E;TER;ES100MSPF2000380;El Ter entre l'Onyar i el Terri;485360,7829;4651185,725
+AFLUENT_ONYAR_ONYAR;Cabal de l'Onyar a Riudellots de la Selva;E;ONYAR;ES100MSPF2000330;Capçalera de l'Onyar fins a la confluència de la riera de Gotarra;484775,4197;4638501,5
+AFLUENT_OSOR;Riera d'Osor;E;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;469728,6;4645714,3
+AFLUENT_PASTERAL_1;Cabal de sortida de la Presa del Pasteral;E;TER;ES100MSPF2000227;El Pasteral;466922,27;4648111,46
+AFLUENT_TERRI_1;Riu Terri a Cornellà del Terri;E;TER;ES100MSPF2000420;El Ter des de la confluència del Terri fins a Flaçà;488675,42;4654337,26
+C_AMBIEN_REC_MOLI;Cabal ambiental del Rec del Molí de Pals;S;TER;ES100MSPF2000460;El Ter des de Flaçà fins al mar;505655,7196;4654442,5
+C_AMBIEN_REC_SENTMENAT;Cabal ambiental del Rec de Sentmenat;S;TER;ES100MSPF2000460;El Ter des de Flaçà fins al mar;498771,7597;4658945,77
+CONTROL_PASTERAL_2;Cabal del Ter sota el Pont (després d'ATL);C;TER;ES100MSPF2000227;El Pasteral;467133,6392;4648235,867
+CONTROL_TER_COLOMERS;Cabal del Ter a la presa de Colomers;C;TER;ES100MSPF2000460;El Ter des de Flaçà fins al mar;499265,9899;4658312,35
+CONTROL_TER_GIRONA;Cabal del Ter sota el Pont de la Barca de Girona;C;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;485004,96;4648754,61
+CONTROL_TER_TORROELLA;Cabal del Ter sota el pont de Torroella de Montgrí;C;TER;ES100MSPF2000460;El Ter des de Flaçà fins al mar;510373,3946;4653681,975
+CR_ANGLES_NO_REG;Comunitat de regants d'Anglès;S;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;467833,0497;4648388,77
+CR_ANGLES_REG;Comunitat de regants d'Anglès;S;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;467833,0497;4648388,77
+CR_ANGLES_TOTAL;Comunitat de regants d'Anglès;S;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;467833,0497;4648388,77
+CR_CERVIA_NO_REG;Comunitat de regants de Cervià, Sant Jordi i Colomers;S;TER;ES100MSPF2000380;El Ter entre l'Onyar i el Terri;485753,7404;4651957,91
+CR_CERVIA_REG;Comunitat de regants de Cervià, Sant Jordi i Colomers;S;TER;ES100MSPF2000380;El Ter entre l'Onyar i el Terri;485753,7404;4651957,91
+CR_CERVIA_TOTAL;Comunitat de regants de Cervià, Sant Jordi i Colomers;S;TER;ES100MSPF2000380;El Ter entre l'Onyar i el Terri;485753,7404;4651957,91
+CR_MOLI_PALS_NO_REG;Comunitat de regants del Rec del Molí de Pals;S;TER;ES100MSPF2000460;El Ter des de Flaçà fins al mar;505655,7196;4654442,5
+CR_MOLI_PALS_REG;Comunitat de regants del Rec del Molí de Pals;S;TER;ES100MSPF2000460;El Ter des de Flaçà fins al mar;505655,7196;4654442,5
+CR_MOLI_PALS_TOTAL;Comunitat de regants del Rec del Molí de Pals;S;TER;ES100MSPF2000460;El Ter des de Flaçà fins al mar;505655,7196;4654442,5
+CR_MONAR_NO_REG;Comunitat de regants de la Sèquia Monar;S;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;479121,2303;4646507,88
+CR_MONAR_REG;Comunitat de regants de la Sèquia Monar;S;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;479121,2303;4646507,88
+CR_MONAR_TOTAL;Comunitat de regants de la Sèquia Monar;S;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;479121,2303;4646507,88
+CR_PARDINA_NO_REG;Comunitat de regants de La Pardina;S;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;467310,4704;4648276,33
+CR_PARDINA_REG;Comunitat de regants de La Pardina;S;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;467310,4704;4648276,33
+CR_PARDINA_TOTAL;Comunitat de regants de La Pardina;S;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;467310,4704;4648276,33
+CR_SENTMENAT_NO_REG;Comunitat de regants de la Presa de Colomers;S;TER;ES100MSPF2000460;El Ter des de Flaçà fins al mar;498771,7597;4658945,77
+CR_SENTMENAT_REG;Comunitat de regants de la Presa de Colomers;S;TER;ES100MSPF2000460;El Ter des de Flaçà fins al mar;498771,7597;4658945,77
+CR_SENTMENAT_TOTAL;Comunitat de regants de la Presa de Colomers;S;TER;ES100MSPF2000460;El Ter des de Flaçà fins al mar;498771,7597;4658945,77
+CR_STJULIA_NO_REG;Comunitat de regants de Sant Julià de Llor;S;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;470928,7698;4645675,58
+CR_STJULIA_REG;Comunitat de regants de Sant Julià de Llor;S;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;470928,7698;4645675,58
+CR_STJULIA_TOTAL;Comunitat de regants de Sant Julià de Llor;S;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;470928,7698;4645675,58
+CR_VILANNA_NO_REG;Comunitat de regants de La Vilanna;S;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;473002,1001;4646917,91
+CR_VILANNA_REG;Comunitat de regants de La Vilanna;S;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;473002,1001;4646917,91
+CR_VILANNA_TOTAL;Comunitat de regants de La Vilanna;S;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;473002,1001;4646917,91
+CR_VINYALS_NO_REG;Comunitat de regants de la sèquia Vinyals;S;TER;ES100MSPF2000380;El Ter entre l'Onyar i el Terri;485758,5298;4651923,24
+CR_VINYALS_REG;Comunitat de regants de la sèquia Vinyals;S;TER;ES100MSPF2000380;El Ter entre l'Onyar i el Terri;485758,5298;4651923,24
+CR_VINYALS_TOTAL;Comunitat de regants de la sèquia Vinyals;S;TER;ES100MSPF2000380;El Ter entre l'Onyar i el Terri;485758,5298;4651923,24
+EDAR_ANGLES;EDAR d'Anglès;E;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;471962,1599;4645631,21
+EDAR_BANYOLES;EDAR de Banyoles;E;TERRI;ES100MSPF2000410;Riu Terri des de la confluència del Revardit fins al Ter;486165,81;4659308,83
+EDAR_BESCANO;EDAR de Bescanó;E;TER;ES100MSPF2000280;El Ter des del Pasteral fins a la confluència de l'Onyar;480041,42;4646774,92
+EDAR_CAMPRODON;EDAR de Camprodon;E;TER;ES100MSPF2000020;El Ter entre el Ritort i el Freser;447162,0196;4683202,7
+EDAR_CASSA;EDAR de Cassà de la Selva i Llagostera;E;GOTARRA;ES100MSPF2000340;Rieres de Gotarra, Verneda i Benaula;486012,2203;4636178,37
+EDAR_CELRA;EDAR de Celrà;E;TER;ES100MSPF2000420;El Ter des de la confluència del Terri fins a Flaçà;489233,71;4654882,16
+EDAR_ESQ;EDAR de Santa Maria de Corçó-L'Esquirol;E;GORGES;ES100MSPF2000230;Riera de les Gorgues;446461,7301;4651821,341
+EDAR_FLAÇA;EDAR de Flaçà;E;TER;ES100MSPF2000420;El Ter des de la confluència del Terri fins a Flaçà;496187,9999;4655999,971
+EDAR_FOLG;EDAR de Folgueroles;E;GURRI;ES100MSPF2000200;Riu Gurri des de la confluència de la riera de Rimentol fins al Ter (inclòs el torrent de Folgueroles);442766,1198;4643999,75
+EDAR_GIRONA;EDAR de Girona;E;TER;ES100MSPF2000380;El Ter entre l'Onyar i el Terri;485974,1103;4652816,02
+EDAR_HOSTOLES;EDAR de Les Planes d'Hostoles;E;BRUGENT;ES100MSPF2000260;El Brugent;462908,9799;4655792,71
+EDAR_MANLLEU;EDAR de Manlleu;E;TER;ES100MSPF2000150;El Ter entre el Ges i el Gurri;440960,79;4649263,6
+EDAR_PALS;EDAR de Pals;E;DARO;ES100MSPF1900040;Riu Daró des de la confluència del Rissec fins al mar, inclosos el Rissec, la riera de Rupià, la riera Grossa i el Torrent de la Revetlla;513499,51;4649039,32
+EDAR_QUART;EDAR de Quart;E;ONYAR;ES100MSPF2000360;Riu Onyar des de la confluència de la riera de Gotarra fins a l'entrada al nucli urbà de Girona, incloses les rieres de Bugantó i de Celrà;487130,2199;4646120,66
+EDAR_RIBES;EDAR de Ribes de Freser;E;FRESER;ES100MSPF2000030;Capçalera del Freser fins a Campdevànol, inclosos el Rigard i el Segadell;431213,1599;4683193,82
+EDAR_RIPOLL;EDAR de Ripoll;E;TER;ES100MSPF2000060;El Ter entre el Freser i la riera de Vallfogona;433880,7202;4668259,59
+EDAR_RIUDELLOTS;EDAR de Riudellots de la Selva;E;ONYAR;ES100MSPF2000360;Riu Onyar des de la confluència de la riera de Gotarra fins a l'entrada al nucli urbà de Girona, incloses les rieres de Bugantó i de Celrà;484398,1699;4639637,48
+EDAR_RODA;EDAR de Roda de Ter;E;TER;ES100MSPF2000210;El Ter entre el Gurri i la cua de l'embassament de Sau;442766,6498;4647377,311
+EDAR_SEVA;EDAR de Seva;E;GURRI;ES100MSPF2000190;Capçalera del Gurri fins a la confluència amb la riera de Tona;438547,7303;4635773,371
+EDAR_STGREGORI;EDAR de Sant Gregori;E;LLEMENA;ES100MSPF2000300;Riera de Llèmena i riera de Canet;480179,5602;4648028,75
+EDAR_STHILARI;EDAR de Sant Hilari Sacalm;E;OSOR;ES100MSPF2000290;Riera d'Osor;458961,5566;4638167,774
+EDAR_STJOANABADESSES;EDAR de Sant Joan de les Abadesses;E;TER;ES100MSPF2000020;El Ter entre el Ritort i el Freser;440363,9602;4675278,741
+EDAR_STQUIRZE;EDAR de Sant Quirze de Besora;E;TER;ES100MSPF2000090;El Ter entre la riera de Vallfogona fins el Ges;436235,9598;4660741,03
+EDAR_TARADELL;EDAR de Taradell;E;GURRI;ES100MSPF2000190;Capçalera del Gurri fins a la confluència amb la riera de Tona;438843,5097;4637418,87
+EDAR_TONA;EDAR de Tona;E;GURRI;ES100MSPF2000195;Riu Gurri entre la riera de Tona i la riera de Rimentol, inclosos la riera de Tona, la conca del Mèder i la riera de Rimentol;436857,1704;4634798,59
+EDAR_TORELLO;EDAR de la Vall del Ges-Torelló;E;TER;ES100MSPF2000090;El Ter entre la riera de Vallfogona fins el Ges;438480,9297;4655077,67
+EDAR_TORROELLA;EDAR de Torroella de Montgrí;E;TER;ES100MSPF2000460;El Ter des de Flaçà fins al mar;512790,6603;4652603,59
+EDAR_VIC;EDAR de Vic;E;GURRI;ES100MSPF2000195;Riu Gurri entre la riera de Tona i la riera de Rimentol, inclosos la riera de Tona, la conca del Mèder i la riera de Rimentol;439818,2903;4644839,05
+EDAR_VILOBI;EDAR de Vilobí d'Onyar;E;ONYAR;ES100MSPF2000330;Capçalera de l'Onyar fins a la confluència de la riera de Gotarra;479115,9098;4637135,3
+CONTROL_TER_SUSQUEDA;Cabal de sortida del Pantà de Susqueda;C;TER;ES100MSPF2000227;El Pasteral;460414,7;4647579,18
+CONTROL_TER_SAU;Cabal de sortida del Pantà de Sau;C;TER;ES100MSPF2000222;Susqueda;460415,39;4647575,83
+AFLUENT_MAJOR_TER;Riera Major;E;TER;ES100MSPF2000223;Susqueda;452105,99;4646331,49
+CONTROL_RODA_TER;Cabal circulant sota el Pont Vell de Roda de Ter;C;TER;ES100MSPF2000209;El Ter entre el Gurri i la cua de l'embassament de Sau;442707,98;4647804,5
+AFLUENT_GURRI;Riu Gurri;E;TER;ES100MSPF2000210;El Ter entre el Gurri i la cua de l'embassament de Sau;442151,63;4648248,47
+CONTROL_VOLTREGA_TER;Cabal circulant per les Masies de Voltregà;C;TER;ES100MSPF2000060;El Ter entre el Freser i la riera de Vallfogona;438242,74;4652598,29
+AFLUENT_GES;Riu Ges;E;TER;ES100MSPF2000150;El Ter entre el Ges i el Gurri;438476,81;4654881,48
+CONTROL_RIPOLL_TER;Cabal circulant després de Ripoll (Colònia de Santa Maria riu i canal);C;TER;ES100MSPF2000060;El Ter entre el Freser i la riera de Vallfogona;433449,71;4669208,86
+CONTROL_ABADESSES_TER;Cabal circulant (riu i central hidroelèctrica);C;TER;ES100MSPF2000020;El Ter entre el Ritort i el Freser;437269,2;4674554,8
+CONTROL_CAMRPDON_TER;Cabal circulant del Riu Ter a Camprodon;C;TER;ES100MSPF2000020;El Ter entre el Ritort i el Freser;447425,71;4682297,66

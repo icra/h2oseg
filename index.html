@@ -258,7 +258,7 @@
           };
 
           if(!metadata.codi_sad){
-            console.log("no trobat:",{codi_sad});
+            console.log("no trobat:",codi_sad);
           }
 
           for(let j=2;j<row.length;j++){
@@ -303,8 +303,10 @@
         .then(r=>r.text())
         .then(text=>{
           console.log(text);
+          alert(text);
         }).catch(err=>{
           console.error(err);
+          alert(err);
         });
       },
     },

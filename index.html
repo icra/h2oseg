@@ -304,6 +304,7 @@
         .then(text=>{
           console.log(text);
           alert(text);
+          fetch_data_ultima_versio();
         }).catch(err=>{
           console.error(err);
           alert(err);
@@ -312,7 +313,10 @@
     },
   }).mount("#app");
 
-  fetch("db/get_data_ultima_versio.php").then(r=>r.text()).then(txt=>{
-    app.data_ultima_versio_taula_unificada=txt;
-  });
+  function fetch_data_ultima_versio(){
+    fetch("db/get_data_ultima_versio.php").then(r=>r.text()).then(txt=>{
+      app.data_ultima_versio_taula_unificada=txt;
+    });
+  }
+  fetch_data_ultima_versio();
 </script>
